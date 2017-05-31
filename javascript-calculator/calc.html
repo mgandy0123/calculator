@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>		<!-- 這是註解 -->
+<html>				<!-- 這是html開頭的tag -->
+<head>				<!-- 這是head開頭的tag -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	<!-- 宣告編碼 -->
+<title>網頁小算盤</title>							<!-- 放在視窗列的文字 -->
+</head>				<!-- 這是head結束的tag -->
+<!-- 開始寫程式囉 -->
+<body>
+<h1>這是一個網頁的小算盤</h1>
+<table border="1">
+<td width="250px" align="right">
+<h2 id="output">0</h2>
+</td>
+</tr>
+</table>
+<table border = 1>
+
+<tr>
+<td><button type="button" onclick=mycal("1")>1</button>
+<td><button type="button" onclick=mycal("2")>2</button>
+<td><button type="button" onclick=mycal("3")>3</button>
+<td><button type="button" onclick=mycal("+")>+</button>
+
+<tr>
+<td><button type="button" onclick=mycal("4")>4</button>
+<td><button type="button" onclick=mycal("5")>5</button>
+<td><button type="button" onclick=mycal("6")>6</button>
+<td><button type="button" onclick=mycal("-")>-</button>
+
+<tr>
+<td><button type="button" onclick=mycal("7")>7</button>
+<td><button type="button" onclick=mycal("8")>8</button>
+<td><button type="button" onclick=mycal("9")>9</button>
+<td><button type="button" onclick=mycal("*")>*</button>
+
+<tr>
+<td><button type="button" onclick=mycal("0")>0</button>
+<td><button type="button" onclick=mycal("=")>=</button>
+<td><button type="button" onclick=mycal("C")>C</button>
+<td><button type="button" onclick=mycal("B")>←</button>
+
+</tr>
+</table>
+
+<script>
+var cal_value, cal_op, cal_sign, cal_add1 ;
+cal_value = 0;
+cal_add1  = 0;
+cal_sign  = 1;
+cal_op    ="+";
+
+
+//array
+var a = [], s = 0, n = 10;
+//a.push("Hello");
+//a.push("World");
+//console.log(a);
+//console.log(a[1]);
+//console.log(a.length);
+//for(var i=0;i<a.length;++i)
+        //s = s + a[i];
+        
+for(var i=0;i<n;++i){
+		a.push((i+1)*(i+1));
+}
+for(var m=0;m<n;++m){
+    s = 0 ;
+for(var i=0;i<n;++i){
+        s = s +a[i]*Math.cos(Math.PI/n*m*(i+1/2));
+}
+}
+console.log(s);
+
+
+
+
+
+function mycal(x) {
+         
+		var y = document.getElementById("output");
+       
+  
+   console.log(x) ;
+   if(x == "B") {
+      var s = y.innerHTML;
+	  if(s.length > 1) {
+	        y.innerHTML = s.substr(0,s.length-1); 
+		} else {
+            y.innerHTML = "0" ;			
+		}	
+	} else if(x == 'C') {
+            y.innerHTML = "0" ;	
+    } else if(x == '+') {
+            cal_add1 = cal_value ;
+         	y.innerHTML = "0" ;	
+           	cal_op = '+';	
+	} else if (x == '-') {
+            cal_add1 = cal_value ;
+            y.innerHTML = "0";
+            cal_op = '-' ;
+    } else if (x == '=') {
+			if(cal_op == '+') {
+              cal_value += cal_add1 ;
+			} else if (cal_op == '-') {
+			       cal_value = cal_add1 - cal_value
+            } if (cal_op == '*') {
+			       cal_value *= cal_add1
+			}
+            y.innerHTML = cal_value ;
+	} else if (x == '*') {
+	       if(cal_add1 == 0){
+		    cal_add1 = cal_value ;
+    }	   else {
+	        cal_add1 *= cal_value ;
+    }		
+	       y.innerHTML = "0" ;
+		   cal_op = '*' ;
+	} else {
+			console.log(y);
+	        if(y.innerHTML == '0') {
+	           y.innerHTML = x ; 
+			} else {
+               y.innerHTML += x ;
+            
+			}
+	}
+       cal_value = Number(y.innerHTML);
+}
+	   
+       
+	   
+
+
+</script>
+</body>
+</html>
